@@ -67,7 +67,7 @@ public class EnemyAI : MonoBehaviour
     private void Patrol()
     {
         MoveEnemyAI(_target , _patrolSpeed);
-        Debug.Log(Vector2.Distance(this.transform.position, _target));
+       
         if(Vector2.Distance(this.transform.position , _target) < 0.5f){
             _target = _target.Equals((Vector2)_pointA) ? _pointB : _pointA;
         }
@@ -83,11 +83,15 @@ public class EnemyAI : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision == null) return;
-        if (collision.gameObject.CompareTag("bullet"))
+        if (collision.gameObject.CompareTag(CONSTANT.BulletTAG))
         {
             GameManager.instance.updateCoin(1f);
             Destroy(this.gameObject);
 
+        }
+        if (collision.gameObject.CompareTag(CONSTANT.PlayerTAG))
+        {
+            GameManager.instance.player.TakeDamge(10f);
         }
     }
     private void OnDrawGizmos()

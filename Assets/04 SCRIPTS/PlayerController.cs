@@ -33,6 +33,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float angle;
     [SerializeField] private List<PhysicsMaterial2D> _material;
 
+    [Header("HP")]
+    [SerializeField] public float _HP = 100f;
+    public float currenHP;
+
+ 
+
     [SerializeField] private PlayerState _playerState = PlayerState.idle;
     public PlayerState playerState => _playerState;
     Vector2 _flip = Vector2.zero;
@@ -43,6 +49,7 @@ public class PlayerController : MonoBehaviour
     {
         _rigi = this.GetComponent<Rigidbody2D>();
         _flip = this.transform.localScale;
+        currenHP = _HP;
     }
 
     // Update is called once per frame
@@ -82,6 +89,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
         {
             _gun.GunFireBullet();
+            AudioController.instance.PlaySound("bullet");
         }
 
     }
@@ -93,7 +101,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            
+           
             if (IsGround())
             {
                 _jumpCount = 0;
@@ -101,6 +109,7 @@ public class PlayerController : MonoBehaviour
 
             if (_jumpCount < _maxJump)
             {
+                AudioController.instance.PlaySound("jump");
                 _rigi.velocity = new Vector2(_rigi.velocity.x, 0);
                 _rigi.AddForce(_jumFore);
                 _jumpCount++;
@@ -114,16 +123,16 @@ public class PlayerController : MonoBehaviour
     }
     private void MovePlayer()
     {
-        _move.y = _rigi.velocity.y;
+        _move = _rigi.velocity;
         if (!IsOnLope)
         {
             _move.x = _inputX * _speed;
         }
-        if(IsGround() && IsOnLope)
+        else if(IsGround() && IsOnLope)
         {
             _move.x = Mathf.Cos(angle * Mathf.Deg2Rad) * _inputX * _speed;
             _move.y = Mathf.Sin(angle * Mathf.Deg2Rad) * _inputX * _speed; 
-        }  
+        }
         if (_inputX > 0)
         {
             _flip.x = Mathf.Abs(_flip.x);
@@ -165,4 +174,17 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(_isGround.transform.position, _radius);
 
     }
+    public void TakeDamge(float damge)
+    {
+        currenHP -= damge;
+        Observer.instance.Notify(CONSTANT.UIDamge);
+
+    }
+    public void HeartPicKup(float hp)
+    {
+        currenHP += hp;
+        if(currenHP >= _HP) {  currenHP = _HP; }
+        Observer.instance.Notify(CONSTANT.UIDamge);
+    }
+    
 }

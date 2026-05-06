@@ -10,22 +10,23 @@ public class GameManager : Singleton<GameManager>
     public CameraFllow cam => _cameraFollow;
     public  PlayerController player => _player;
     [Header("Score")]
-  
+
     [SerializeField] private float _coin = 0f;
+    [Header("Level")]
+    [SerializeField] public float Level = 1f;
     public float coin => _coin;
-    
-    void Start()
+    public void Start()
     {
-        
+        UPdateLevel();
     }
-    // Update is called once per frame
-    void Update()
+
+    public void UPdateLevel()
     {
-        
+        Observer.instance.Notify(CONSTANT.UILevel);
     }
     public void updateCoin(float coin)
     {
         _coin += coin;
-        Observer.instance.Notify("UpdateCoin");
+        Observer.instance.Notify(CONSTANT.UICoin);
     }
 }
