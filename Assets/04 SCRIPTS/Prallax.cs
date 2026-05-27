@@ -18,7 +18,8 @@ public class Prallax : MonoBehaviour
         float cam =GameManager.instance.cam.transform.position.x;
         float player = GameManager.instance.player.transform.position.x;
         float distance = Mathf.Abs(player -cam);
-        if (GameManager.instance.player.playerState.ToString().Equals("run")  && !(distance >= 2f) )
+        //Debug.Log(GameManager.instance.player.Speed);
+        if (GameManager.instance.player.Speed != 0  && !(distance >= 2f) )
         {
             _way = GameManager.instance.player.transform.localScale.x < 0 ? 1 : -1;
         }

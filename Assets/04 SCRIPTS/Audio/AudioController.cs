@@ -39,5 +39,6 @@ public class AudioController : Singleton<AudioController>
         }
         sourceSound.clip = audioClip;
         sourceSound.gameObject.SetActive(true);
+        sourceSound.Play();
     }
 }

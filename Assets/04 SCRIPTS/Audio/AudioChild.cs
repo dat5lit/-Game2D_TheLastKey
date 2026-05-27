@@ -23,6 +23,7 @@ public class AudioChild : MonoBehaviour
     }
     IEnumerator waitSoundDone()
     {
+        yield return new WaitUntil(() => _audio.isPlaying);
         yield return new WaitUntil(()=> !_audio.isPlaying);
         this.gameObject.SetActive(false);
     }
