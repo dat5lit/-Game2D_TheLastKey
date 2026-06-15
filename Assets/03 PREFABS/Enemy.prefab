@@ -74,10 +74,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1860519843
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4a457d75c795052468991a5b32990485, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7e1f34cf703c78a47baff2e858051d26, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,13 +105,16 @@ MonoBehaviour:
   _detectRange: 5
   _attackRange: 2
   distance: 3
-  _maxHealth: 1000
+  _maxHealth: 100
   _hitVFXPrefab: {fileID: 8525990746615576120, guid: b85d21f3b8fed714bacf0c4fd50fa512, type: 3}
   _knockbackHorizontal: 1.5
   _knockbackVertical: 2
   _stunDuration: 1.5
   _flashColor: {r: 1, g: 0, b: 0, a: 1}
   _flashDuration: 0.15
+  _damageToPlayer: 10
+  _damageCooldown: 0.5
+  healthBar: {fileID: 0}
   _enemyState: 0
 --- !u!50 &2274372396261468808
 Rigidbody2D:

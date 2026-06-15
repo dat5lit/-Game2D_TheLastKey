@@ -12,5 +12,9 @@ public class CONSTANT
     public static string UICoin = "UICoin";
     public static string UIDamge = "UIDamge";
     public static string UILevel = "UILevel";
+
+    public static string TimeUI = "TIME";
+
+    public static string BossMessage = "BossDialogue";
     
 }
